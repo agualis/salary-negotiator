@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VModal from 'vue-js-modal'
+import { store } from './vuex/store'
 
 Vue.use(VModal, { dialog: true })
 
@@ -12,5 +13,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store
 })

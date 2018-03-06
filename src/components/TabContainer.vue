@@ -26,25 +26,25 @@
 </template>
 
 <script>
+import { SUBMIT_MAX_OFFERED_SALARY, SUBMIT_MIN_EXPECTED_SALARY } from '../vuex/store'
 import SalarySubmitTab from './SalarySubmitTab'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   components: {
     SalarySubmitTab
   },
-  data () {
-    return {
-      maxOfferedSalary: null,
-      minExpectedSalary: null
-    }
+  computed: {
+    ...mapState(['maxOfferedSalary', 'minExpectedSalary'])
   },
   methods: {
+    ...mapMutations([SUBMIT_MAX_OFFERED_SALARY, SUBMIT_MIN_EXPECTED_SALARY]),
     onEmployerSubmit (quantity) {
-      this.maxOfferedSalary = quantity
       this.showPopupWhenSalariesSubmitted()
+      this.$store.commit(SUBMIT_MAX_OFFERED_SALARY, parseInt(quantity))
     },
     onEmployeeSubmit (quantity) {
-      this.minExpectedSalary = quantity
+      this.$store.commit(SUBMIT_MIN_EXPECTED_SALARY, parseInt(quantity))
       this.showPopupWhenSalariesSubmitted()
     },
     showPopupWhenSalariesSubmitted () {
